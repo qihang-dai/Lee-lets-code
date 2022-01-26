@@ -1,1 +1,1 @@
-​
+​the NULLPOINTER exception problem is: you got a null object, and you still want the next element of the null!. So if its null, dont let your code ask for the null's next. thats why people write cur!=null&&cur.next != null to ensure this thing. but in reverse linkedlist, we don't need the null after the null, so its just cur!=null. if we use cur.next != null, when we approach the last node, the lastnode would not be reversed. you do not do a two step fast pointer ( fast = fast.next.next) so no need for cur.next != null
