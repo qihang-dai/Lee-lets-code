@@ -13,7 +13,7 @@ class Solution {
         ListNode cur = new ListNode();
         ListNode dummy = cur;
         
-        while(l1 != null || l2 != null){
+        while(true){
             if(l1 == null){
                 dummy.next = l2;
                 break;
