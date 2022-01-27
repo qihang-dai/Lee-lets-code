@@ -13,14 +13,17 @@ class Solution {
     }
     
     public boolean dfs(char[][] board, int i, int j, int k, String word){
+        //终止条件
         if(k == word.length()){
             return true;
         }
         
+        //边界条件
         if(i < 0 || j < 0 || i >= board.length|| j >= board[0].length){
             return false;
         }
         
+        //判断条件，也可以写成==然后进入下面的递归，不过比较麻烦，所以直接取非情况。
         if(word.charAt(k) != board[i][j]) return false;
         
         char tmp = board[i][j];
