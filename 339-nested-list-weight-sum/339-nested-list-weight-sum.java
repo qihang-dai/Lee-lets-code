@@ -29,20 +29,28 @@
 class Solution {
     
     public int depthSum(List<NestedInteger> nestedList) {
-        return helper(nestedList, 1);
-        
-    }
-    
-    public int helper(List<NestedInteger> list, int depth){
+        Queue<NestedInteger> que = new LinkedList();
+        for(NestedInteger n : nestedList){
+            que.offer(n);
+        }
         int sum = 0;
-        for(NestedInteger n : list){
-            if(!n.isInteger()){
-                sum += helper(n.getList(), depth + 1);
-            }else{
-                sum += n.getInteger() * depth;
+        int depth = 0;
+        while(!que.isEmpty()){
+            int size = que.size();
+            depth++;
+            for (int i = 0; i < size; i++){
+                NestedInteger cur = que.poll();
+                if(cur.isInteger()){
+                    sum += depth * cur.getInteger();
+                }else{
+                    List<NestedInteger> children = cur.getList();
+                    for (NestedInteger child : children){
+                        que.offer(child);
+                    }
+                }
             }
         }
-        
         return sum;
+        
     }
 }
