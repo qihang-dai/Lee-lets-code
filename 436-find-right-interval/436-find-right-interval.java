@@ -7,19 +7,29 @@ class Solution {
             map.put(intervals[i], i);
         }
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
-        // res[map.get(intervals[n - 1])] = - 1;
         for(int i = 0; i < n; i++){
-            int j = i;
-            while(j < n && intervals[j][0] < intervals[i][1]){
-                j++;
-            }
-            if(j == n){
-                res[map.get(intervals[i])] = -1;
-            }else{
-                res[map.get(intervals[i])] = map.get(intervals[j]);
-            }
+            int[] right = binarySearch(intervals, intervals[i][1], 0, intervals.length - 1);
+            res[map.get(intervals[i])] = right == null? -1 : map.get(right);
         }
         return res;
+    }
+    
+    int[] binarySearch(int[][] intervals, int right, int low, int high){
+        if(low >= high){
+            if(intervals[low][0] >= right){
+                return intervals[low];
+            }
+            return null;
+        }
+        
+        int mid = low + (high - low)/2;
+
+        if(intervals[mid][0] < right){
+            return binarySearch(intervals, right, mid + 1, high);
+        }else{
+            return binarySearch(intervals, right, low, mid);
+        }
         
     }
+        
 }
