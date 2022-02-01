@@ -19,8 +19,8 @@ class Solution {
                 char c2 = next.charAt(j);
 
                 if(c1 != c2){
-                    Set<Character> set=new HashSet<Character>();
-                    if(map.containsKey(c1)) set=map.get(c1);
+                    Set set = map.get(c1);
+                    if(set == null) set = new HashSet();
                     if(!set.contains(c2)){
                         set.add(c2);
                         map.put(c1, set);
