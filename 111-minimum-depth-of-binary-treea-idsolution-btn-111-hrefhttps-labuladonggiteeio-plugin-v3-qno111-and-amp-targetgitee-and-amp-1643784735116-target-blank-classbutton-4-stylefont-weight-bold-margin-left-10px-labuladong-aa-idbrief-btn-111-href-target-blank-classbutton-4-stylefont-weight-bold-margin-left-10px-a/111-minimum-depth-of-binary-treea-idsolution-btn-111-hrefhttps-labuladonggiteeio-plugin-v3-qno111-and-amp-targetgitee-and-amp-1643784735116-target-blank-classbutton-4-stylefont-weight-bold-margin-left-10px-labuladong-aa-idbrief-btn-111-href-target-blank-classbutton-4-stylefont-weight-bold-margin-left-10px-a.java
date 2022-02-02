@@ -23,11 +23,12 @@ class Solution {
     
     void minDepth(TreeNode root, int depth){
         if(root == null) return;
+        minDepth(root.left, depth + 1);
+        minDepth(root.right, depth + 1);
         if(root.left == null && root.right == null){
             min = Math.min(depth, min);
         }
-        minDepth(root.left, depth + 1);
-        minDepth(root.right, depth + 1);
+
 
     }
 }
