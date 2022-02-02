@@ -18,7 +18,7 @@ class Solution {
             }
         }
         if(root.val < p.val){
-           successor = inorderSuccessor(root.right, p);
+           return inorderSuccessor(root.right, p);
         }
         if(root.val == p.val){
             successor = getMin(root.right);
