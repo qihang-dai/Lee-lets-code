@@ -1,32 +1,56 @@
-class Solution {
-    void dfs(List<Integer>[] adList, int[] visited, int node){
-        visited[node] = 1;
-        for(int i = 0; i< adList[node].size(); i++){
-            if(visited[adList[node].get(i)] == 0){
-                dfs(adList, visited, adList[node].get(i));
-            }
+class UF{
+    int size;
+    int[] root;
+    int[] rank;
+    UF(int n){
+        size = n;
+        root = new int[n];
+        rank = new int[n];
+        for(int i = 0; i < n; i++){
+            root[i] = i;
+            rank[i] = i;
         }
     }
-    public int countComponents(int n, int[][] edges) {
-        int res = 0;
-        List<Integer>[] adList = new ArrayList[n];
-        int[] visited = new int[n];
-        for(int i = 0; i < n; i++){
-            adList[i] = new ArrayList<Integer>();
+    
+    int find(int x){
+        if(root[x] == x){
+            return x;
         }
-        for(int i = 0; i < edges.length; i++){
-            adList[edges[i][0]].add(edges[i][1]);
-            adList[edges[i][1]].add(edges[i][0]);
-
-        }
-        for(int i = 0; i < n; i++){
-            if(visited[i] == 0){
-                res++;
-                dfs(adList, visited, i);
-            }
+        
+        return root[x] = find(root[x]);
+        
+    }
+    
+    void union(int p, int q){
+         int rootp = find(p);
+        int rootq = find(q);
+        if(rootp != rootq){
+            size--;
+            if(rank[rootp] > rank[rootq]){
+                root[rootq] = rootp;
                 
+            }else if(rank[rootp] < rank[rootq]){
+                root[rootp] = rootq;  
+                
+            }else{
+                root[rootp] = rootq;
+                rank[rootq]++;
+            }
         }
-        return res;
+        
+    }
+    
+    int size(){
+        return size;
+    }
+}
+class Solution {
+    public int countComponents(int n, int[][] edges) {
+        UF uf = new UF(n);
+        for(int[] edge : edges){
+            uf.union(edge[0], edge[1]);
+        }
+        return uf.size();
         
     }
 }
