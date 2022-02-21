@@ -11,7 +11,7 @@ class Solution {
             }
         }
         
-        while(p >= 0 &&i < 0 && j >= 0){
+        while(j >= 0){
                 nums1[p--] = nums2[j --];
             
         }
