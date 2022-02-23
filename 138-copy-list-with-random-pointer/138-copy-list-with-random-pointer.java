@@ -37,8 +37,8 @@ class Solution {
         //extract
         
         Node dummy = new Node(-1);
-        Node cur = dummy;
         p = head;
+        Node cur = dummy;
         while(p != null){
             cur.next = p.next;
             cur = cur.next;
