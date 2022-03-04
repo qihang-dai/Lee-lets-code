@@ -21,18 +21,18 @@ class Solution {
         q.add(root);
         while(!q.isEmpty()){
             int size = q.size();
+            TreeNode last = q.peek();
             for(int i = 0; i < size; i++){
                 TreeNode cur = q.poll();
-                if(cur.left != null){
-                    q.add(cur.left);
-                }
                 if(cur.right != null){
                     q.add(cur.right);
                 }
-                if(i == size - 1){
-                    res.add(cur.val);
+                if(cur.left != null){
+                    q.add(cur.left);
                 }
+
             }
+            res.add(last.val);
             
         }
         return res;
