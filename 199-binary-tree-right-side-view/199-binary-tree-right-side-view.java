@@ -14,28 +14,23 @@
  * }
  */
 class Solution {
+    int depth = 0;
+    List<Integer> res = new ArrayList();
     public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> res = new ArrayList();
-        Queue<TreeNode> q = new ArrayDeque();
-        if(root == null) return res;
-        q.add(root);
-        while(!q.isEmpty()){
-            int size = q.size();
-            TreeNode last = q.peek();
-            for(int i = 0; i < size; i++){
-                TreeNode cur = q.poll();
-                if(cur.right != null){
-                    q.add(cur.right);
-                }
-                if(cur.left != null){
-                    q.add(cur.left);
-                }
-
-            }
-            res.add(last.val);
-            
-        }
+        dfs(root);
         return res;
-        
+    }
+    
+    public void dfs(TreeNode root){
+        if(root == null){
+            return;
+        }
+        depth++;
+        if(res.size() < depth){
+            res.add(root.val);
+        }
+        dfs(root.right);
+        dfs(root.left);
+        depth--;//dfs回来了，深度一定要回归
     }
 }
