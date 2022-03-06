@@ -5,26 +5,26 @@ class Solution {
     
     List<String> res = new ArrayList();
     
+    StringBuilder sb = new StringBuilder();
     public List<String> letterCombinations(String digits) {
         if(digits.isEmpty()){
             return res;
         }
-        backtrack(digits, 0, new StringBuilder());
+        backtrack(digits, 0);
         return res;
     }
     
-    public void backtrack(String digits, int start, StringBuilder sb){
-        if(sb.length() == digits.length()){
+    public void backtrack(String digits, int start){
+        if(start == digits.length()){
             res.add(sb.toString());
             return;
         }
-        for(int i = start; i < sb.length() + 1; i++){
-            String cur = mapping[digits.charAt(i) - '0'];
-            for(int j = 0; j < cur.length(); j++){
-                sb.append(cur.charAt(j));
-                backtrack(digits, start + 1, sb);
-                sb.deleteCharAt(sb.length() - 1);
-            }
+        String cur = mapping[digits.charAt(start) - '0'];
+        for(int j = 0; j < cur.length(); j++){
+            sb.append(cur.charAt(j));
+            backtrack(digits, start + 1);
+            sb.deleteCharAt(sb.length() - 1);
         }
+        
     }
 }
