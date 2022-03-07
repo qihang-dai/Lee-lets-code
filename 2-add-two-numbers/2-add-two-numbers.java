@@ -13,7 +13,7 @@ class Solution {
         ListNode dummy = new ListNode(-1);
         ListNode p = dummy;
         int carry = 0;
-        while(l1 != null || l2 != null || carry > 0){
+        while(l1 != null || l2 != null || carry != 0){
             int val = carry;
             if(l1 != null){
                 val += l1.val;
@@ -23,10 +23,11 @@ class Solution {
                 val += l2.val;
                 l2 = l2.next;
             }
-            carry = val / 10;
+            carry = val/10;
             val = val % 10;
             p.next = new ListNode(val);
             p = p.next;
+        
         }
         return dummy.next;
     }
