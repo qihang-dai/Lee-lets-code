@@ -5,3 +5,5 @@ O(n logn)不仅是二分，所有二分/分治 基础的算法，比如quicksort
 找中点的快慢指针的fast需要fast.next.next，为了避免null.next，while先检查fast!=null再检查fast.next !=null.对于链表还需要从在mid.prev = null断开上一个表...
 ​
 然后分治二分是种递归，需要basecase。。。
+​
+然后是merge函数总写错... dummy head是要保留的哨兵节点，需要另用指针p去遍历链表。
