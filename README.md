@@ -1,7 +1,7 @@
 # Lee-lets-code
 Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub](https://github.com/QasimWani/LeetHub)
 
-3/15 no OA, no interview
+3/15 no OA, no interview, 熟能生巧
         
         https://leetcode.com/problems/battleships-in-a-board/submissions/
         void的dfs仍然可以带动指针移动，这非常好。
