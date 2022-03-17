@@ -1,15 +1,14 @@
 class Solution {
     public int numberOfSteps(int num) {
-        int count = 0;
+        if(num == 0) return 0;
+        int res = 0;
         while(num > 0){
-            count++;
-            if(num % 2 != 0){
-                num--;
-            }else{
-                num/=2;
-            }
+            res += (num & 1) == 0 ? 1 : 2;
+            num = num >> 1;
         }
-        return count;
+        
+        //we will end up at 2/2 = 1, this step is odd, so extra 1 need to be substract
+        return res - 1;
         
     }
 }
