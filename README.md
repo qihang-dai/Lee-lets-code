@@ -14,3 +14,6 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
         https://leetcode.com/problems/serialize-and-deserialize-bst/submissions/
         emm序列化二叉树， 就是递归左右子树。这里用了BST的左小右大来判断什么时候需要传回Null作为节点。
   
+3/21 发生了什么，这么多天没刷题
+
+https://leetcode.com/problems/moving-average-from-data-stream/submissions/
