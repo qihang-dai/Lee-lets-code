@@ -17,4 +17,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 3/21 发生了什么，这么多天没刷题
 
 https://leetcode.com/problems/moving-average-from-data-stream/submissions/
+
 https://leetcode.com/problems/valid-word-abbreviation/submissions/ 简单模拟 但我不会
+
+https://leetcode.com/problems/find-median-from-data-stream/submissions/ 绝妙利用数据结构的设计
