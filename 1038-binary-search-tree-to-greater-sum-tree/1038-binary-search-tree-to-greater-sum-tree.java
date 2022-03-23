@@ -15,17 +15,16 @@
  */
 class Solution {
     public TreeNode bstToGst(TreeNode root) {
-        dfs(root);
+        dfs(root, new TreeNode(0));
         return root;
     }
-    
-    int sum = 0;
-    public void dfs(TreeNode root){
+
+    public void dfs(TreeNode root, TreeNode sum){
         if(root == null) return;
-        dfs(root.right);
-        sum += root.val;
-        root.val = sum;
-        dfs(root.left);
+        dfs(root.right, sum);
+        sum.val += root.val;
+        root.val = sum.val;
+        dfs(root.left, sum);
         
     }
 }
