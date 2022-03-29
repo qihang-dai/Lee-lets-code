@@ -25,3 +25,5 @@ https://leetcode.com/problems/find-median-from-data-stream/submissions/ 绝妙�
 3/28 我知道发生了什么。 发生了555和累和睡觉
 
 https://leetcode.com/problems/most-frequent-subtree-sum/submissions/
+
+https://leetcode.com/problems/01-matrix/submissions/  dp是数组memo的遍历。两个方向的遍历可以保证dp完全成功。
