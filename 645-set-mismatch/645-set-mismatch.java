@@ -1,17 +1,18 @@
 class Solution {
     public int[] findErrorNums(int[] nums) {
-        Arrays.sort(nums);
-        int rep =  - 1;
-        int sum = 0;
+        
+        int rep = -1, miss = -1;
         for(int i = 0; i < nums.length; i++){
-            if(i < (nums.length - 1) && nums[i] == nums[i + 1]){
-                rep = nums[i];
-            } 
-            sum = sum + i + 1- nums[i];
+            int index = Math.abs(nums[i]) - 1;
+            if(nums[index] < 0) rep = index + 1;
+            else nums[index] = - nums[index];
         }
         
-        int missing = rep + sum;
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] > 0)
+                miss = i + 1;
+        }
+        return new int[]{rep, miss};
         
-        return new int[]{rep, missing};
     }
 }
