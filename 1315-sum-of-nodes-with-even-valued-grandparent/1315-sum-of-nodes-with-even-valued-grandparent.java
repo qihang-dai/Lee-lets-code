@@ -24,8 +24,6 @@ class Solution {
         if(cur == null) return;
         TreeNode left = cur.left;
         TreeNode right = cur.right;
-        dfs(left);
-        dfs(right);
         if(cur.val % 2 == 0){
             if(left != null){
                 TreeNode leftGranson = left.left;
@@ -48,5 +46,7 @@ class Solution {
                 }
             }
         }
+        dfs(left);
+        dfs(right);
     }
 }
