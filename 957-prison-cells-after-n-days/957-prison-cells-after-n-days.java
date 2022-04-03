@@ -1,26 +1,27 @@
 class Solution {
-    public int[] prisonAfterNDays(int[] cells, int N) {
+    public int[] prisonAfterNDays(int[] cells, int n) {
         
         boolean hasCycle = false;
         Set<String> set = new HashSet();
         int cycle = 0;
-        for(int i=0;i<N;i++){
-            int[] next = nextDay(cells);
+        for(int i = 0; i < n; i++){
+            int[] next = next(cells);
             String key = Arrays.toString(next);
-            if(!set.contains(key)){ //store cell state
+            if(set.contains(key)){
+                hasCycle = true;
+                break;
+            }else{
                 set.add(key);
                 cycle++;
             }
-            else{ //hit a cycle
-                hasCycle = true;
-                break;
-            }
+            
             cells = next;
         }
+        
         if(hasCycle){
-            N%=cycle;
-            for(int i=0;i<N;i++){
-                cells = nextDay(cells);
+            n%=cycle;
+            for(int i=0;i<n;i++){
+                cells = next(cells);
             }   
         }
 
@@ -29,7 +30,7 @@ class Solution {
     }
     
     
-    private int[] nextDay(int[] cells){
+    private int[] next(int[] cells){
         int[] tmp = new int[cells.length];
         for(int i=1;i<cells.length-1;i++){
             tmp[i]=cells[i-1]==cells[i+1]?1:0;
