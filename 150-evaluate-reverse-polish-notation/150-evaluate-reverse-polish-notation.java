@@ -1,27 +1,28 @@
-class Solution {
+public class Solution {
     public int evalRPN(String[] tokens) {
-        Stack<Integer> stack = new Stack();
-        for(String s : tokens){
-            if(s.matches("-?\\d+")){
-                stack.push(Integer.valueOf(s));
-            }else{
-                int second = stack.pop();
-                int first = stack.pop();
-                int tmp = 0;
-                if(s.equals("+")){
-                    tmp = first + second;
-                }else if(s.equals("-")){
-                    tmp = first - second;
-                }else if(s.equals("/")){
-                    tmp = first / second;
-                }else if(s.equals("*")){
-                    tmp = first * second;
-                }else{
-                    System.err.println("bad operator");
-                }
-                stack.push(tmp);
-            }
-        }
-        return stack.pop();
-    }
+        int a,b;
+		Stack<Integer> S = new Stack<Integer>();
+		for (String s : tokens) {
+			if(s.equals("+")) {
+				S.add(S.pop()+S.pop());
+			}
+			else if(s.equals("/")) {
+				b = S.pop();
+				a = S.pop();
+				S.add(a / b);
+			}
+			else if(s.equals("*")) {
+				S.add(S.pop() * S.pop());
+			}
+			else if(s.equals("-")) {
+				b = S.pop();
+				a = S.pop();
+				S.add(a - b);
+			}
+			else {
+				S.add(Integer.parseInt(s));
+			}
+		}	
+		return S.pop();
+	}
 }
