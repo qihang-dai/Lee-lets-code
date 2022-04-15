@@ -1,34 +1,40 @@
+class Node{
+    public int val;
+    public Node next;
+    public Node(int val){
+        this.val = val;
+        this.next = null;
+    }
+}
+
 class MyCircularQueue {
     
+    int cap;
+    Node front, rear;
     int size;
-    int front;
-    int rear;
-    int[] queue;
-    int k;
-    
     public MyCircularQueue(int k) {
-        this.k = k;
-        size = 0;
-        front = 0;
-        rear = 0;
-        queue = new int[k];
-        
+        cap = k;
     }
     
     public boolean enQueue(int value) {
         if(isFull()) return false;
-        
-        //TODO
-        queue[rear] = value;
-        rear = rear + 1 ==k ? 0 : rear + 1;
+        Node nextNode = new Node(value);
+        if(isEmpty()){
+            front = nextNode;
+            rear = nextNode;
+        }else{
+            rear.next = nextNode;
+            rear = rear.next;
+        }
         size++;
+
         return true;
+        
     }
     
     public boolean deQueue() {
         if(isEmpty()) return false;
-        //TODO
-        front = front + 1 == k ? 0 : front + 1;
+        front = front.next;
         size--;
         return true;
         
@@ -36,17 +42,12 @@ class MyCircularQueue {
     
     public int Front() {
         if(isEmpty()) return -1;
-        //TODO
-        
-        return queue[front];
-        
+        return front.val;
     }
     
     public int Rear() {
         if(isEmpty()) return -1;
-        //TODO
-        System.out.printf("rear: %s \n", rear);
-        return queue[(rear - 1 + k) % k];
+        return rear.val;
         
     }
     
@@ -56,7 +57,7 @@ class MyCircularQueue {
     }
     
     public boolean isFull() {
-        return size == k;
+        return size == cap;
         
     }
 }
