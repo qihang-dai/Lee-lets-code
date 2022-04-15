@@ -4,12 +4,14 @@ class MyCircularQueue {
     int front;
     int rear;
     int[] queue;
+    int k;
     
     public MyCircularQueue(int k) {
-        size = k + 1;
+        this.k = k;
+        size = 0;
         front = 0;
         rear = 0;
-        queue = new int[size];
+        queue = new int[k];
         
     }
     
@@ -18,14 +20,16 @@ class MyCircularQueue {
         
         //TODO
         queue[rear] = value;
-         rear = (rear + 1) % size;
+        rear = (rear + 1) % k;
+        size++;
         return true;
     }
     
     public boolean deQueue() {
         if(isEmpty()) return false;
         //TODO
-        front = (front + 1) % size;
+        front = (front + 1) % k;
+        size--;
         return true;
         
     }
@@ -42,17 +46,17 @@ class MyCircularQueue {
         if(isEmpty()) return -1;
         //TODO
         System.out.printf("rear: %s \n", rear);
-        return queue[(rear - 1 + size) % size];
+        return queue[(rear - 1 + k) % k];
         
     }
     
     public boolean isEmpty() {
-        return front == rear;
+        return size == 0;
         
     }
     
     public boolean isFull() {
-        return (rear + 1) % size == front;
+        return size == k;
         
     }
 }
