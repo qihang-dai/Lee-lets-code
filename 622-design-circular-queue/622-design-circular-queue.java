@@ -20,7 +20,7 @@ class MyCircularQueue {
         
         //TODO
         queue[rear] = value;
-        rear = (rear + 1) % k;
+        rear = rear + 1 ==k ? 0 : rear + 1;
         size++;
         return true;
     }
@@ -28,7 +28,7 @@ class MyCircularQueue {
     public boolean deQueue() {
         if(isEmpty()) return false;
         //TODO
-        front = (front + 1) % k;
+        front = front + 1 == k ? 0 : front + 1;
         size--;
         return true;
         
