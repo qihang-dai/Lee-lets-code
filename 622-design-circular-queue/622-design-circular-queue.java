@@ -5,7 +5,6 @@ class MyCircularQueue {
     public MyCircularQueue(int k) {
         q = new int[k];
         this.k = k;
-        front = rear = size = 0;
     }
     
     public boolean enQueue(int value) {
