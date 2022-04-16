@@ -5,7 +5,7 @@ class MyCircularQueue {
     public MyCircularQueue(int k) {
         front = rear = 0;
         cap = k;
-        q = new int[cap];
+        q = new int[cap + 1];
     }
     
     public boolean enQueue(int value) {
@@ -39,7 +39,7 @@ class MyCircularQueue {
     }
     
     public boolean isEmpty() {
-        return count == 0;
+        return 0 == count;
     }
     
     public boolean isFull() {
