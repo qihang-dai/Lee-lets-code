@@ -1,6 +1,7 @@
 class MyCircularQueue {
     int cap, front, rear;
     int[] queue;
+    int size = 0;
     
     int inc(int i){
         if(++i >= cap) i = 0;
@@ -14,7 +15,7 @@ class MyCircularQueue {
     
     public MyCircularQueue(int k) {
         front = rear = 0;
-        cap = k + 1;
+        cap = k;
         queue = new int[cap];
         Arrays.fill(queue, -1);
 
@@ -24,6 +25,7 @@ class MyCircularQueue {
         if(isFull()) return false;
         queue[rear] = value;
         rear = inc(rear);
+        size++;
         return true;
     }
     
@@ -31,6 +33,7 @@ class MyCircularQueue {
         if(isEmpty()) return false;
         queue[front] = -1;
         front = inc(front);
+        size--;
         return true;
     }
     
@@ -45,12 +48,12 @@ class MyCircularQueue {
     }
     
     public boolean isEmpty() {
-        return front == rear;
+        return size == 0;
         
     }
     
     public boolean isFull() {
-        return inc(rear) == front;
+        return size == cap;
     }
 }
 
