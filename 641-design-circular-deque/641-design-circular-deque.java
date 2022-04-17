@@ -1,9 +1,18 @@
 class MyCircularDeque {
     
-    int cap;
-    int front;
-    int rear;
+    int cap, front, rear;
     int[] queue;
+    int inc(int i){
+        if(++i >= cap) i = 0;
+        return i;
+    }
+    
+    int dec(int i){
+        if(--i < 0) i = cap - 1;
+        return i;
+    }
+    
+
     public MyCircularDeque(int k) {
         cap = k + 1;
         queue = new int[cap];
@@ -13,30 +22,29 @@ class MyCircularDeque {
     
     public boolean insertFront(int value) {
         if(isFull()) return false;
-        front = (front - 1 + cap) % cap;
+        front = dec(front);
         queue[front] = value;
-        
         return true;
+        
     }
     
     public boolean insertLast(int value) {
         if(isFull()) return false;
         queue[rear] = value;
-        rear = (rear + 1) % cap;
+        rear = inc(rear);
         return true;
     }
     
     public boolean deleteFront() {
         if(isEmpty()) return false;
-        front = (front + 1 + cap) % cap;
+        front = inc(front);
         return true;
     }
     
     public boolean deleteLast() {
         if(isEmpty()) return false;
-        rear = (rear - 1 + cap) % cap;
+        rear = dec(rear);
         return true;
-
         
     }
     
@@ -47,18 +55,25 @@ class MyCircularDeque {
     
     public int getRear() {
         if(isEmpty()) return -1;
-        return queue[(rear - 1 + cap) % cap];
-        
+        return queue[dec(rear)];
     }
     
     public boolean isEmpty() {
+        // print();
         return front == rear;
         
     }
     
     public boolean isFull() {
-        return (rear + 1) % cap == front;
-        
+        // print();
+        return inc(rear) == front;
+    }
+    
+    public void print(){
+        for(int n : queue){
+            System.out.printf("%d\s", n);
+        }
+        System.out.println();
     }
 }
 
