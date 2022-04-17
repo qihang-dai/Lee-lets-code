@@ -3,11 +3,13 @@ class MyCircularQueue {
     int[] queue;
     
     int inc(int i){
-        return (i + 1) % cap;
+        if(++i >= cap) i = 0;
+        return i;
     }
     
     int dec(int i){
-        return (i - 1 + cap) % cap;
+        if(--i < 0) i = cap - 1;
+        return i;
     }
     
     public MyCircularQueue(int k) {
