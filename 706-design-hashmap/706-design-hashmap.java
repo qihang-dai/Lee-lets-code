@@ -1,24 +1,87 @@
 class MyHashMap {
-    int N = 1000009;
-    int[] map;
-    // int INF = Integer.MAX_VALUE;
+    class Node{
+        int key, value;
+        Node next;
+        Node(int key, int value){
+            this.key = key;
+            this.value = value;
+        }
+    }
+    
+    Node[] nodes;
     public MyHashMap() {
-        map = new int[N];
-        Arrays.fill(map, -1);
+        nodes = new Node[10009];
         
     }
     
+    int getIndex(int key){
+        int hash = Integer.hashCode(key);
+        hash ^= hash >>> 16;
+        return hash % nodes.length;
+    }
+    
     public void put(int key, int value) {
-        map[key] = value;
+        int idx = getIndex(key);
+        Node loc = nodes[idx], tmp = loc;
+        if(loc != null){
+            Node prev = null;
+            while(tmp != null){
+                if(tmp.key == key){
+                    tmp.value = value;
+                    return;
+                }
+                prev = tmp;
+                tmp = tmp.next;
+            }
+            //record last Node
+            tmp = prev;
+        }
+        Node node = new Node(key, value);
+        
+        node.next = loc;
+        nodes[idx] = node;
+        
+        // if(tmp != null){
+        //     tmp.next = node;
+        // }else{
+        //     nodes[idx] = node;
+        // }
+        
         
     }
     
     public int get(int key) {
-        return map[key];
+        int idx = getIndex(key);
+        Node loc = nodes[idx];
+        if(loc != null){
+            while(loc != null){
+                if(loc.key == key){
+                    return loc.value;
+                }
+                loc = loc.next;
+            }
+        }
+        return -1;
+        
     }
     
     public void remove(int key) {
-        map[key] = -1;
+        int idx = getIndex(key);
+        Node loc = nodes[idx];
+        if(loc != null){
+            Node prev = null;
+            while(loc != null){
+                if(loc.key == key){
+                    if(prev != null) prev.next = loc.next;
+                    else nodes[idx] = loc.next;
+                    return;
+                }
+                prev = loc;
+                loc = loc.next;
+            }
+
+        }
+
     }
 }
 
