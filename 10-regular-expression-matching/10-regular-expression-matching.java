@@ -1,40 +1,32 @@
 class Solution {
-    Boolean[][] memo;
     public boolean isMatch(String s, String p) {
-        memo = new Boolean[s.length()][p.length()];
-        return dp(s, 0, p, 0);
+        int m = s.length(), n = p.length();
+        boolean[][] dp = new boolean[m + 1][n + 1];
+        dp[0][0] = true;
+    for (int i = 0; i < p.length(); i++) {
+        if (p.charAt(i) == '*' && dp[0][i-1]) {
+            dp[0][i+1] = true;
+        }
     }
-    
-    public boolean dp(String s, int i, String p, int j){
-        if(j == p.length()){
-            return i == s.length();
-        }
-        
-        if(i == s.length()){
-            if((p.length() - j) % 2 == 1) return false;
-            for(; j + 1 < p.length(); j += 2){// make sure we get 2 2 2 pairs till the end
-                if(p.charAt(j + 1) != '*') return false;
+    for (int i = 0 ; i < s.length(); i++) {
+        for (int j = 0; j < p.length(); j++) {
+            if (p.charAt(j) == '.') {
+                dp[i+1][j+1] = dp[i][j];
             }
-            return true;
-        }
-        if(memo[i][j] != null) return memo[i][j];
-        
-        boolean res = false;
-        
-        if(s.charAt(i) == p.charAt(j) || p.charAt(j) == '.'){
-            if((j+1) < p.length() && p.charAt(j + 1) == '*'){
-                res =  dp(s, i, p, j + 2) || dp(s, i + 1, p, j);
-            }else{
-                res = dp(s, i + 1, p, j + 1);
+            if (p.charAt(j) == s.charAt(i)) {
+                dp[i+1][j+1] = dp[i][j];
             }
-        }else{
-            if(j < p.length() - 1 && p.charAt(j + 1) == '*'){
-                res = dp(s, i, p, j + 2);
-            }else{
-                res = false;
+            if (p.charAt(j) == '*') {
+                if (p.charAt(j-1) != s.charAt(i) && p.charAt(j-1) != '.') {
+                    dp[i+1][j+1] = dp[i+1][j-1];
+                } else {
+                    dp[i+1][j+1] = (dp[i+1][j] || dp[i][j+1] || dp[i+1][j-1]);
+                }
             }
         }
-        memo[i][j] = res;
-        return res;
+    }
+    return dp[s.length()][p.length()];
+        
+        
     }
 }
