@@ -3,7 +3,7 @@ class Solution {
         int i = 0, j = 0, istar = -1, jstar = -1;
         int m = s.length(), n = p.length();
         // some special case:
-        // if(m < n) return false;
+        // if(m < n) return false; this is wrong, cause we can have endless star ***
         while(i < m){
             //condition 1: single char match                         //if after star we match something (star can be 0 or 1), we ++
             if(j < n && (s.charAt(i) == p.charAt(j) || p.charAt(j) == '?')){
