@@ -4,7 +4,10 @@ class Solution:
         mapping = collections.defaultdict(list)
         
         for str in strs:
-            mapping[tuple(sorted(str))].append(str)
+            array = [0] * 26
+            for w in str:
+                array[ord(w) - ord('a')] += 1
+            mapping[tuple(array)].append(str)
             
         return mapping.values()
         
