@@ -2,33 +2,30 @@ class CustomStack:
 
     def __init__(self, maxSize: int):
         self.maxSize = maxSize
-        self.stack = [None] * maxSize
-        self.top = 0
+        self.stack = []
+        self.inc = []
         
 
     def push(self, x: int) -> None:
-        if self.top < self.maxSize:
-            self.stack[self.top] = x
-            self.top += 1
-        # print(self.stack)
+        if len(self.stack) < self.maxSize:
+            self.stack.append(x)
+            self.inc.append(0)
             
 
     def pop(self) -> int:
-        if self.top == 0:
-            return - 1
-        self.top -= 1
-        popval = self.stack[self.top]
-        self.stack[self.top] = None
-        # print(self.stack)
-        return popval
+        if not self.stack:
+            return -1
+        #lazy inc
+        if len(self.inc) > 1:
+            self.inc[-2] += self.inc[-1]
+        return self.stack.pop() + self.inc.pop()
         
 
     def increment(self, k: int, val: int) -> None:
-        bound = min(k, self.top)
-        # print(bound)
-        for i in range(bound):
-            self.stack[i] += val
-        # print(self.stack)
+        bound = min(k, len(self.inc))
+        if bound > 0:
+            self.inc[bound - 1] += val
+        
         
 
 
