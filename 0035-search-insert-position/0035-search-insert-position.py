@@ -1,4 +1,14 @@
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
-        return bisect_left(nums, target)
+        
+        low, high = 0, len(nums)
+        
+        while(low < high):
+            mid = (low + high) // 2
+            if nums[mid] >= target:
+                high = mid
+            else:
+                low = mid + 1
+            
+        return low
         
