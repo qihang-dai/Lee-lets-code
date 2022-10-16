@@ -1,14 +1,12 @@
 class Solution:
     def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
         
-        heap = []
-        res = []
+        l, r = 0, len(arr)
         
-        for a in arr:
-            dist = abs(a - x)
-            heapq.heappush(heap, (dist, a))
+        while r - l > k:
+            if abs(arr[r - 1] - x) >= abs(arr[l] - x):
+                r -= 1
+            else:
+                l += 1
         
-        for i in range(k):
-            res.append(heapq.heappop(heap)[1])
-        
-        return sorted(res)
+        return arr[l:r]
