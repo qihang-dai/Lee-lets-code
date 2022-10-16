@@ -2,15 +2,14 @@ class Solution:
     def minTimeToType(self, word: str) -> int:
         
         
-        second = 0
+        second = len(word)
         prev = 'a'
         
         for w in word:
-            if prev != w:
-                clock = abs(ord(w) - ord(prev))
-                counterclock = abs(26 - clock)
-                second += min(clock, counterclock) #move
-            second += 1 #type
+            
+            clock = abs(ord(w) - ord(prev))
+            counterclock = abs(26 - clock)
+            second += min(clock, counterclock) #move
             prev = w
         
         return second
