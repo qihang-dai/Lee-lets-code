@@ -14,7 +14,7 @@ class Solution:
                 if start == len(s):
                     pathString = ".".join(path)
                     res.append(pathString)
-                    return
+                return
             for i in range(start + 1, min(len(s) + 1, start + 4)):
                 tmp = s[start: i]                    
                 if len(tmp) > 1 and int(tmp[0]) == 0:
