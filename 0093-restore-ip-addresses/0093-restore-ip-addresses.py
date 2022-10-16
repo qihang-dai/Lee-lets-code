@@ -16,7 +16,7 @@ class Solution:
                     res.append(pathString)
                     return
             for i in range(start + 1, min(len(s) + 1, start + 4)):
-                tmp = s[start: i]
+                tmp = s[start: i]                    
                 if len(tmp) > 1 and int(tmp[0]) == 0:
                     break
                 if len(tmp) > 2 and int(tmp) > 255:
