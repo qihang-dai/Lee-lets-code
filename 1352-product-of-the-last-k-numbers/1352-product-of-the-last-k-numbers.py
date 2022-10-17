@@ -1,33 +1,19 @@
 class ProductOfNumbers:
 
     def __init__(self):
-        self.stream = []
-        self.product = []
+        self.A = [1] #get this as a base to help other. we want -1 / -1 - k to be the val so its reaonable to leave one as the extra prefix
         
 
     def add(self, num: int) -> None:
-
-        self.stream.append(num)
-        
-        if not self.product:
-            self.product.append(num)
-        else:
-            self.product.append(num * self.product[-1])
-        
         if num == 0:
-            self.product = []
-        
-        # print("stream", self.stream, "product", self.product)
-        
-        
-
+            self.A = [1]
+        else:
+            self.A.append(self.A[-1] * num)
+            
     def getProduct(self, k: int) -> int:
-        if len(self.product) < k:
+        if len(self.A) <= k:
             return 0
-        if len(self.product) == k:
-            return self.product[-1]
-        return self.product[-1] // self.product[-1 - k]
-        
+        return self.A[-1] // self.A[-1-k]
 
 
 # Your ProductOfNumbers object will be instantiated and called as such:
