@@ -10,7 +10,7 @@ class Solution:
         
         res = []
 
-        while len(res) < m * n:
+        while left <= right and up <= down:
             for i in range(left, right + 1):
                 res.append(matrix[up][i])
             up += 1
@@ -19,6 +19,7 @@ class Solution:
                 res.append(matrix[i][right])
             right -= 1
             
+            #need to check this incase the while loop doesnt stop cause the loop condition var has changed
             if up > down or left > right:
                 break
             
