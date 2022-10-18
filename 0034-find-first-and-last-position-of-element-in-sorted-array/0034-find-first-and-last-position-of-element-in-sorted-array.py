@@ -1,31 +1,31 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         
-        def bisearch_left(nums, target):
-            low, high = 0, len(nums)
-            while low < high:
-                mid = (low + high) // 2
-                if target > nums[mid]:
-                    low = mid + 1
+        def bisect_left(target):
+            l, h = 0, len(nums)
+            while l < h:
+                mid = (l + h) // 2
+                if nums[mid] < target:
+                    l = mid + 1
                 else:
-                    high = mid
-            return low
+                    h = mid
+            return h
         
-        def bisearch_right(nums, target):
-            low, high = 0, len(nums)
-            while low < high:
-                mid = (low + high) // 2
-                if target >= nums[mid]:
-                    low = mid + 1
+        def bisect_right(target):
+            l, h = 0, len(nums)
+            while l < h:
+                mid = (l + h) // 2
+                if nums[mid] <= target:
+                    l = mid + 1
                 else:
-                    high = mid
-            return low
-    
-        left = bisearch_left(nums, target)
-        right = bisearch_right(nums, target)
+                    h = mid
+            return h
         
-        if left >= right:
-            return [-1, -1]
-
         
-        return [left, right - 1]
+        res = [bisect_left(target), bisect_right(target) - 1]
+        left, right = res
+        if left >= right + 1:
+            return [-1 ,-1]
+        else:
+            return res
+            
