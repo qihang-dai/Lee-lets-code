@@ -1,48 +1,33 @@
 class Solution:
     def generateMatrix(self, n: int) -> List[List[int]]:
         
-        matrix = [[0] * n for i in range(n)]
+        left = 0
+        right = n - 1
+        up = 0
+        down = n - 1
         
-        top = 0
-        def dfs(i, j, val):
-            if i < 0 or i >= n or j < 0 or j >= n or matrix[i][j] != 0:
-                return
+        matrix = [[0] * n for i in range(n)]
+        val = 1
+        while left <= right and up <= down:
+            for i in range(left, right + 1):
+                matrix[up][i] = val
+                val += 1
+            up += 1
             
-            matrix[i][j] = val
+            for i in range(up, down + 1):
+                matrix[i][right] = val
+                val += 1
+            right -= 1
             
-            if i <= j + 1:  #the turn right point is always at the crossline
-                dfs(i, j + 1, val + 1)
-
-            dfs(i + 1, j, val + 1)
-
-
-            dfs(i, j - 1, val + 1)
-
-
-            dfs(i - 1, j, val + 1)
+            for i in range(right, left-1, -1):
+                matrix[down][i] = val
+                val += 1
+            down -= 1
             
-                
-        dfs(0, 0, 1)
-
+            for i in range(down, up - 1, -1):
+                matrix[i][left] = val
+                val += 1
+            left += 1
         
         return matrix
-            
-"""
-
-[[1,2,3,4],
-[12,13,14,5],
-[11,16,15,6],
-[10,9,8,7]]
-
-[[1,2,3,4],
-[16,15,14,5],
-[11,12,13,6],
-[10,9,8,7]]
-
- 1 2 3 4 5
-         6
-         7
-         8
-      10 9
-"""
         
